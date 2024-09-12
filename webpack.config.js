@@ -5,7 +5,7 @@ module.exports = {
   mode: "development",
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "./games"),
+    path: path.resolve(__dirname, "./docs"),
     filename: "index_bundle.js",
   },
   plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
