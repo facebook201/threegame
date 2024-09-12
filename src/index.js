@@ -130,7 +130,7 @@ function load3DModels() {
     function (gltf) {
       trex = gltf.scene;
 
-      trex.scale.setScalar(0.3);
+      trex.scale.setScalar(0.5);
       trex.rotation.y = Math.PI / 2;
       trex.rotation.z = 0.1;
 
