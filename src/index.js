@@ -46,6 +46,7 @@ const cactusGroup = new THREE.Group();
 scene.add(cactusGroup);
 let renderer;
 let camera;
+let sound;
 
 // 创建 信息内容 容器
 function createInfoElement() {
@@ -68,21 +69,20 @@ function createCamera() {
 }
 createCamera();
 
+
 function loadMusic() {
   const listener = new THREE.AudioListener();
-  camera.add(listener);
+  camera.add( listener );
   // 创建一个全局 audio 源
-  const sound = new THREE.Audio(listener);
+  sound = new THREE.Audio( listener );
   // 加载一个 sound 并将其设置为 Audio 对象的缓冲区
   const audioLoader = new THREE.AudioLoader();
   audioLoader.load('models/m/mm.mp3', function(buffer) {
     sound.setBuffer(buffer);
     sound.setLoop(true);
-    sound.setVolume(0.5);
-    sound.play();
+    sound.setVolume(1);
   });
 }
-
 loadMusic();
 
 function createRenderer() {
@@ -192,7 +192,7 @@ load3DModels();
 // 面板
 function createFloor() {
   const geometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
-  const texture = THREE.ImageUtils.loadTexture("sand.jpg");
+  const texture = new THREE.TextureLoader().load("sand.jpg");
 
   // 纹理贴图方式 重复
   texture.wrapS = THREE.RepeatWrapping;
@@ -253,6 +253,9 @@ function handleInput() {
     if (isGameOver) {
       restartGame();
       return;
+    }
+    if (!sound.isPlaying) {
+      sound.play();
     }
     if (e.code === "Space" || e.code === "ArrowUp") {
       jump = true; // 跳跃
